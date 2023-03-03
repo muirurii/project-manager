@@ -1,5 +1,7 @@
-const User = require("../db/Models/User")
-const Project = require("../db/Models/Project")
+const User = require("../db/Models/User");
+const Project = require("../db/Models/Project");
+const Task = require("../db/Models/Task");
+const Comment = require("../db/Models/Comment");
 
 const {
     GraphQLObjectType,
@@ -28,12 +30,21 @@ const ProjectType = new GraphQLObjectType({
         },
         creator: {
             type: UserType,
+            resolve(parent) {
+                return User.findById(parent.creatorId);
+            },
         },
         admins: {
-            type: UserType,
+            type: new GraphQLList(UserType),
+            resolve(parent) {
+                return User.findById(parent.admins);
+            },
         },
         assignedUsers: {
-            type: UserType,
+            type: new GraphQLList(UserType),
+            resolve(parent) {
+                return User.findById(parent.assignedUsers);
+            },
         },
         status: {
             type: GraphQLString,
@@ -42,27 +53,108 @@ const ProjectType = new GraphQLObjectType({
             type: GraphQLInt,
         },
         tasks: {
-            type: new GraphQLList(TaskTypes)
-        }
+            type: new GraphQLList(TaskType),
+            resolve(parent) {
+                return Task.find({ _id: $in[parent.tasks] });
+            },
+        },
     }),
 });
 
 const UserType = new GraphQLObjectType({
-    name: "Client",
+    name: "User",
     fields: () => ({
-        name: {
+        _id: {
+            type: GraphQLID,
+        },
+        username: {
             type: GraphQLString,
         },
         email: {
             type: GraphQLString,
         },
-        _id: {
-            type: GraphQLID,
+        password: {
+            type: GraphQLString,
+        },
+        picture: {
+            type: GraphQLString,
         },
         projects: {
             type: new GraphQLList(ProjectType),
             resolve(parent) {
-                return projects.filter((project) => project.clientId === parent._id);
+                return Project.find({ _id: $in[parent.projects] });
+            },
+        },
+    }),
+});
+
+const CommentType = new GraphQLObjectType({
+    name: "Comment",
+    fields: () => ({
+        _id: {
+            type: GraphQLID,
+        },
+        body: {
+            type: GraphQLString,
+        },
+        creator: {
+            type: UserType,
+            resolve(parent) {
+                return User.findById(parent.creatorId);
+            },
+        },
+        replies: {
+            type: CommentType,
+            resolve(parent) {
+                return Comment.find({ _id: $in[parent.replies] });
+            },
+        },
+    }),
+});
+
+const TaskType = new GraphQLObjectType({
+    name: "Task",
+    fields: () => ({
+        _id: {
+            type: GraphQLID,
+        },
+        taskName: {
+            type: GraphQLString,
+        },
+        project: {
+            type: ProjectType,
+            resolve(parent) {
+                return Project.findById(parent.projectId);
+            },
+        },
+        description: {
+            type: GraphQLString,
+        },
+        creator: {
+            type: UserType,
+            resolve(parent) {
+                return User.findById(parent.creatorId);
+            },
+        },
+        assignedUsers: {
+            type: new GraphQLList(UserType),
+            resolve(parent) {
+                return User.find({ _id: $in[parent.assignedUsers] });
+            },
+        },
+        pictureURL: {
+            type: GraphQLString,
+        },
+        status: {
+            type: GraphQLString,
+        },
+        estimatedHours: {
+            type: GraphQLInt,
+        },
+        comments: {
+            type: new GraphQLList(CommentType),
+            resolve(parent) {
+                return Comment.find({ _id: $in[parent.comments] });
             },
         },
     }),
@@ -72,14 +164,14 @@ const RootQuery = new GraphQLObjectType({
     name: "Root",
     fields: () => ({
         client: {
-            type: ClientType,
+            type: UserType,
             args: {
                 _id: {
                     type: GraphQLID,
                 },
             },
             resolve(parent, args) {
-                return clients.find((client) => client._id === args._id);
+                return User.findById(args._id);
             },
         },
         project: {
@@ -90,44 +182,32 @@ const RootQuery = new GraphQLObjectType({
                 },
             },
             resolve(parent, args) {
-                return projects.find((project) => project._id == args._id);
-            },
-        },
-        clients: {
-            type: new GraphQLList(ClientType),
-            resolve() {
-                return clients;
-            },
-        },
-        projects: {
-            type: new GraphQLList(ProjectType),
-            resolve() {
-                return projects;
+                return Project.findById(args._id);
             },
         },
     }),
 });
 
-const Mutation = new GraphQLObjectType({
-    name: "Mutation",
-    fields: {
-        addProject: {
-            type: ProjectType,
-            args: {
-                name: GraphQLString,
-                description: GraphQLString,
-                clientId: GraphQLID,
-            },
-            resolve(parent, args) {
-                const { clientId, description, name } = args;
-                projects.push({ _id: 5, clientId, description, name });
-                return projects;
-            },
-        },
-    },
-});
+// const Mutation = new GraphQLObjectType({
+//     name: "Mutation",
+//     fields: {
+//         addProject: {
+//             type: ProjectType,
+//             args: {
+//                 name: GraphQLString,
+//                 description: GraphQLString,
+//                 clientId: GraphQLID,
+//             },
+//             resolve(parent, args) {
+//                 const { clientId, description, name } = args;
+//                 projects.push({ _id: 5, clientId, description, name });
+//                 return projects;
+//             },
+//         },
+//     },
+// });
 
 module.exports = new GraphQLSchema({
     query: RootQuery,
-    mutation: Mutation,
+    // mutation: Mutation,
 });

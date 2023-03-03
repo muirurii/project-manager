@@ -9,7 +9,7 @@ const ProjectSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    creator: {
+    creatorId: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: "User",
         required: true,
