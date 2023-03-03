@@ -6,7 +6,7 @@ const projects = [{
         evolving concept that has the
         potential to transform the way
         businesses operate.`,
-        status: "In Progress"
+        isComplete: false
     },
     {
         _id: "2",
@@ -16,7 +16,7 @@ const projects = [{
         evolving concept that has the
         potential to transform the way
         businesses operate.`,
-        status: "Done"
+        isComplete: true
     },
     {
         _id: "3",
@@ -26,7 +26,7 @@ const projects = [{
         evolving concept that has the
         potential to transform the way
         businesses operate.`,
-        status: "In Progress"
+        isComplete: false
     },
 ];
 
