@@ -30,25 +30,25 @@ const projects = [{
     },
 ];
 
-const clients = [{
+const users = [{
         _id: "1",
         name: "Tony Stark",
         email: "tony@gmail.com",
-        phone: "345-7788-33"
+        password: "1234"
     },
     {
         _id: "2",
         name: "Naomi Ima",
         email: "naomi@gmail.com",
-        phone: "567-1838-58"
+        password: "1234"
     },
     {
         _id: "3",
         name: "Stanley",
         email: "stanley@gmail.com",
-        phone: "734-3537-88"
+        password: "1234"
     },
 ];
 
 
-module.exports = { projects, clients };
+module.exports = { projects, users };
