@@ -1,26 +1,39 @@
 const express = require("express");
 const { ApolloServerPluginLandingPageGraphQLPlayground } = require('apollo-server-core');
+const dotenv = require("dotenv");
+const path = require("path");
+dotenv.config({
+    path: path.join(__dirname, '../', ".env")
+});
 const PORT = process.env.PORT || 5000;
+const connection = require("./db/config");
 const { ApolloServer } = require("apollo-server-express");
 const { typeDefs } = require("./schema/TypeDefs");
-const TaskQueries = require("./schema/Resolvers/taskQueries")
-const UserQueries = require("./schema/Resolvers/userQueries")
-const ProjectQueries = require("./schema/Resolvers/projectQueries")
+const { getTask, getTasks } = require("./schema/Resolvers/taskQueries")
+const { getUser, getUsers } = require("./schema/Resolvers/userQueries")
+const { getProject, getProjects } = require("./schema/Resolvers/projectQueries")
+const { addUser, addProject, addTask } = require("./schema/Mutations")
 
 const app = express();
+connection();
 
 const startServer = async() => {
     const server = new ApolloServer({
         typeDefs,
         resolvers: {
             Query: {
-                getUser: UserQueries.getUser,
-                getUsers: UserQueries.getUsers,
-                getProject: ProjectQueries.getProject,
-                getProjects: ProjectQueries.getProjects,
-                getTask: TaskQueries.getTask,
-                getTasks: TaskQueries.getTasks,
+                getUser,
+                getUsers,
+                getProject,
+                getProjects,
+                getTask,
+                getTasks,
             },
+            Mutation: {
+                addUser,
+                addProject,
+                addTask
+            }
         },
         plugins: [
             ApolloServerPluginLandingPageGraphQLPlayground

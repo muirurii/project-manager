@@ -6,56 +6,83 @@ const typeDefs = gql `
     username: String!
     email: String!
     picture: String!
-    projects: [String]
-    createdAt: String
+    projects: [String!]!
+    createdAt: String!
   }
 
   type Project {
     _id: ID!
-    projectName: String
-    description: String
+    projectName: String!
+    description: String!
     creatorId: ID!
-    admins: [User!]
-    assignedUsers: [User!]
-    status: String
-    estimatedHours: String
-    tasks: [Task!]
-    createdAt: String
+    admins: [User!]!
+    assignedUsers: [User!]!
+    status: String!
+    estimatedHours: Int!
+    tasks: [Task!]!
+    createdAt: String!
   }
 
   type Task {
     _id: ID!
-    taskName: String
-    projectId: String
-    description: String
+    taskName: String!
+    projectId: String!
+    description: String!
     creatorId: ID!
-    assignedUsers: [User!]
-    pictureURL: String
-    cloudinaryID: String
-    status: String
-    estimatedHours: String
-    comments: [Comment!]
-    createdAt: String
+    assignedUsers: [User!]!
+    pictureURL: String!
+    cloudinaryID: String!
+    status: String!
+    estimatedHours: String!
+    comments: [Comment!]!
+    createdAt: String!
   }
 
   type Comment {
     _id: ID!
-    body: String
+    body: String!
     creatorId: ID!
-    taskId: String
-    replies: [Comment!]
-    createdAt: String
+    taskId: String!
+    replies: [Comment!]!
+    createdAt: String!
+  }
+
+  input UserInput {
+    username: String!
+    email: String!
+    password: String!
+  }
+
+  input ProjectInput {
+    projectName: String
+    description: String!
+    creatorId: ID!
+    estimatedHours: Int
+  }
+
+  input TaskInput {
+    taskName:String!,
+    projectId:ID!,
+    description:String!,
+    creatorId:ID!,
+    estimatedHours:Int!
   }
 
   #Queries
 
-  type Query{ 
-    getUser(_id: ID!): User
-    getUsers: [User!]
-    getProject: Project
-    getProjects: [Project!]
-    getTask: Task
-    getTasks: [Task!]
+  type Query {
+    getUser(_id: ID!): User!
+    getUsers: [User!]!
+    getProject: Project!
+    getProjects: [Project!]!
+    getTask: Task!
+    getTasks: [Task!]!
+  }
+
+  type Mutation {
+    addUser(input: UserInput): User!
+    addProject(input: ProjectInput): Project!
+    addTask(input: TaskInput): Task!
   }
 `;
 
