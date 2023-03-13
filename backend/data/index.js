@@ -32,19 +32,19 @@ const projects = [{
 
 const users = [{
         _id: "1",
-        name: "Tony Stark",
+        username: "Tony Stark",
         email: "tony@gmail.com",
         password: "1234"
     },
     {
         _id: "2",
-        name: "Naomi Ima",
+        username: "Naomi Ima",
         email: "naomi@gmail.com",
         password: "1234"
     },
     {
         _id: "3",
-        name: "Stanley",
+        username: "Stanley",
         email: "stanley@gmail.com",
         password: "1234"
     },
