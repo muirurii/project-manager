@@ -5,33 +5,25 @@ import { Link } from "react-router-dom";
 const Header = () => {
   return (
     <header>
-    <NavBar as="ul" style={{listStyle:"none"}} className="bg-light text-dark px-4">
+    <Nav variant="tabs" as="ul" fill
+    style={{listStyle:"none"}} className=" px-4 pt-1 container">
         <Nav.Item as="li" className="mx-2">
-          <Link className="nav-link" to="/">
-            <Nav.Link className="" as="span">Home</Nav.Link>
+          <Link className="nav-link py-3" to="/">Home</Link>
+        </Nav.Item>
+        <Nav.Item as="li" className="mx-2">
+          <Link className="nav-link py-3" to="/projects">Projects</Link>
+        </Nav.Item>
+        <Nav.Item as="li" className="mx-2">
+          <Link className="nav-link py-3" to="/projects/new">New project</Link>
+        </Nav.Item>
+        <Nav.Item as="li" className="mx-2">
+          <Link className="nav-link py-3" to="/login">Login
         </Link>
         </Nav.Item>
         <Nav.Item as="li" className="mx-2">
-          <Link className="nav-link" to="/projects">
-            <Nav.Link className="" as="span">Projects</Nav.Link>
-        </Link>
+          <Link className="nav-link py-3" to="/signup">Signup</Link>
         </Nav.Item>
-        <Nav.Item as="li" className="mx-2">
-          <Link className="nav-link" to="/projects/new">
-            <Nav.Link className="" as="span">New project</Nav.Link>
-        </Link>
-        </Nav.Item>
-        <Nav.Item as="li" className="mx-2">
-          <Link className="nav-link" to="/login">
-            <Nav.Link className="" as="span">Login</Nav.Link>
-        </Link>
-        </Nav.Item>
-        <Nav.Item as="li" className="mx-2">
-          <Link className="nav-link" to="/signup">
-            <Nav.Link className="" as="span">Signup</Nav.Link>
-        </Link>
-        </Nav.Item>
-    </NavBar>
+    </Nav>
     </header>
   )
 }

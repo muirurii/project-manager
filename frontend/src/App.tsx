@@ -1,24 +1,21 @@
-import React from 'react';
 import Header from './components/Layout/Header';
 import {BrowserRouter as Router,Routes,Route} from "react-router-dom";
-import Cards from './components/Cards';
-import Login from './components/Login';
-import SignUp from './components/Signup';
-import NewProject from './components/NewProject';
+import Login from './Pages/Login';
+import SignUp from './Pages/Signup';
+import NewProject from './Pages/NewProject';
+import HomePage from './Pages/HomePage';
 
 function App() {
   return (
     <Router>
-      <div className=" h-full">
       <Header />
       <Routes>
-        <Route path="/" element={<Cards/>} />
+        <Route path="/" element={<HomePage/>} />
         <Route path="/projects" element={<p>Projects</p>} />
         <Route path="/projects/new" element={<NewProject />} />
         <Route path="/login" element={<Login/>} />
         <Route path="/signup" element={<SignUp/>} />
       </Routes>
-      </div>
     </Router>
   );
 }
