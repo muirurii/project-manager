@@ -19,7 +19,7 @@ const ProjectSchema = new mongoose.Schema({
         ref: "User",
         default: []
     },
-    assignedUsers: {
+    members: {
         type: [mongoose.SchemaTypes.ObjectId],
         ref: "User",
         default: []

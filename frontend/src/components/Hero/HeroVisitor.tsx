@@ -12,8 +12,10 @@ import {
         <Row className="justify-content-center">
           <h1 className="my-5">
             Easily manage projects with
+            <span className="text-primary d-inline-block">
+             Pro</span>ject
             <span className="text-primary d-inline-block px-2">
-              Project Manager
+               Manager
             </span>
           </h1>
         </Row>
@@ -35,7 +37,7 @@ import {
               Track progress</ListGroup.Item>
           </ListGroup>
         </Row>
-        <Link className="btn btn-primary btn-lg d-inline-lock my-5" to="/signup">
+        <Link className="btn btn-primary btn-lg rounded-pill d-inline-lock my-4" to="/signup">
           Get started
         </Link>
       </Container>

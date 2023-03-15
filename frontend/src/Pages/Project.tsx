@@ -1,5 +1,6 @@
 import { Card } from "react-bootstrap";
 import TaskList from "../components/Projects/TaskList";
+import AddTask from "../components/Projects/AddTask";
 
 const Project = () => {
   return (

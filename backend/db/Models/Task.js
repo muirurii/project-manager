@@ -18,22 +18,14 @@ const TaskSchema = new mongoose.Schema({
         ref: "User",
         required: true,
     },
-    assignedUsers: {
+    assignedMembers: {
         type: [mongoose.SchemaTypes.ObjectId],
         ref: "User",
         default: []
     },
-    pictureURL: {
-        type: String,
-        default: ""
-    },
-    cloudinaryID: {
-        type: String,
-        default: "",
-    },
     status: {
         type: String,
-        enum: ["complete", "inprogress, late"],
+        enum: ["complete", "in progress, late"],
     },
     estimatedHours: {
         type: Number,

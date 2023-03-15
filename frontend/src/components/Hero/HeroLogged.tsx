@@ -9,7 +9,7 @@ const HeroLogged = () => {
   return (
     <div className="mb-4">
       <h1 className="my-5">
-        Welcome back <span className="text-primary">John Doe</span>
+        Welcome back <span className="text-dark">John Doe</span>
       </h1>
       <div className="w-100 d-flex" style={{height:"400px",width:"100vw"}}>
         <div className="w-100 d-flex">
