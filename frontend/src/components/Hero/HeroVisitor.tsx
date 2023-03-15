@@ -4,7 +4,8 @@ import {
     Row,
   } from "react-bootstrap";
   import { Link } from "react-router-dom";
-  
+  import {BiBook,BiUserPlus,BiBookAdd,BiGitBranch} from "react-icons/bi";
+
   const HeroVisitor = () => {
     return (
       <Container className="mb-4">
@@ -19,12 +20,19 @@ import {
         <Row className="justify-content-center align-items-center">
           <h2 className="my-4">How to get started</h2>
           <ListGroup className="list-group-flush ">
-            <ListGroup.Item className="border-0">Register account</ListGroup.Item>
             <ListGroup.Item className="border-0">
-              Invite team members
+              <BiBook className="d-inline-block mx-2 text-primary" height="60" width="60"  />
+              Create Project</ListGroup.Item>
+            <ListGroup.Item className="border-0">
+              <BiUserPlus className="d-inline-block mx-2 text-primary" height="60" width="60" />
+              Add team members
             </ListGroup.Item>
-            <ListGroup.Item className="border-0">Assign tasks</ListGroup.Item>
-            <ListGroup.Item className="border-0">Track progress</ListGroup.Item>
+            <ListGroup.Item className="border-0">
+              <BiBookAdd className="d-inline-block mx-2 text-primary" height="60" width="60" />
+              Assign tasks</ListGroup.Item>
+            <ListGroup.Item className="border-0">
+              <BiGitBranch className="d-inline-block mx-2 text-primary" height="60" width="60" />
+              Track progress</ListGroup.Item>
           </ListGroup>
         </Row>
         <Link className="btn btn-primary btn-lg d-inline-lock my-5" to="/signup">

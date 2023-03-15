@@ -1,12 +1,12 @@
-import { Card, ListGroup,Button,Badge } from "react-bootstrap";
-import TaskBadges from "../components/Projects/TaskBadges";
+import { Card } from "react-bootstrap";
+import TaskList from "../components/Projects/TaskList";
 
 const Project = () => {
   return (
     <div className="container">
         <h1 className="my-5">Project One</h1>
         <div className="d-flex gap-4">
-        <Card className="border-0" style={{maxWidth:"600px"}}>
+        <Card className="border-0" style={{maxWidth:"550px"}}>
             <Card.Img variant="top" src="/img.png" />
             <Card.Body>
                 <Card.Title>Title</Card.Title>
@@ -15,13 +15,7 @@ const Project = () => {
                 </Card.Text>
             </Card.Body>
         </Card>
-        <ListGroup className="w-100">
-            <ListGroup.Item className="bg-primary text-white">Tasks</ListGroup.Item>
-            <TaskBadges />
-            <ListGroup.Item>Task one</ListGroup.Item>
-            <ListGroup.Item>Task two</ListGroup.Item>
-            <ListGroup.Item>Task three</ListGroup.Item>
-        </ListGroup>
+        <TaskList />
         </div>
     </div>
   )
