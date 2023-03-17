@@ -36,7 +36,7 @@ const data = [
 export default class LineGraph extends PureComponent {
   render() {
     return (
-      <div className="w-100">
+      <div className="w-50">
         <h3 className="my-3">Total tasks and projects</h3>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart

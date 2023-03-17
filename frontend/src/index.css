@@ -4,12 +4,13 @@
 
 .btn-primary {
     background-color: var(--primary-color);
+    border-radius: 300px;
 }
 
-.btn-primary:hover {
-    border: 1px solid var(--primary-color);
-    background-color: #fff;
-    color: #000;
+.btn-primary:hover,
+button.btn-primary:active {
+    background-color: var(--primary-color) !important;
+    opacity: .96;
 }
 
 .text-primary {
@@ -19,4 +20,8 @@
 
 .border-primary {
     border-color: var(--primary-color);
+}
+
+form {
+    max-width: 500px;
 }

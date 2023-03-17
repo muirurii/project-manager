@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { Formik,Field,Form } from 'formik';
 
-const AddTask = () =>{
+const AddMember = () =>{
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -12,20 +12,17 @@ const AddTask = () =>{
   return (
     <>
       <Button  className="rounded-pill d-inline-block ms-4 btn-primary" onClick={handleShow}>
-        Add Task
+        Add member
       </Button>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Add Task</Modal.Title>
+          <Modal.Title>Add member</Modal.Title>
         </Modal.Header>
         <Modal.Body>
         <Formik
          initialValues= {{
-            taskName:"",
-            description:"",
-            estimatedHours:"",
-            assignedUser:""
+            memberName:"",
         }}
         onSubmit= {(values,{setSubmitting}) =>{
             console.log(values);
@@ -34,43 +31,13 @@ const AddTask = () =>{
             <Form>
             <div className="mb-3">
             <label className="form-label"
-            htmlFor="taskName">
-                task name
+            htmlFor="memberName">
+                member name
             </label>
             <Field type="text"
             className="form-control"
-            name ="taskName"
-            id="taskName"
-            />
-            </div>
-            <div className="mb-3">
-                <label className="form-label" htmlFor="description">description</label>
-                <Field type="textarea"
-                className="form-control"
-                id="description"
-                name ="description"
-                />
-            </div>
-            <div className="mb-3">
-            <label className="form-label"
-            htmlFor="estimatedHours">
-                estimated hours
-            </label>
-            <Field type="text"
-            className="form-control"
-            name ="estimatedHours"
-            id="estimatedHours"
-            />
-            </div>
-            <div className="mb-3">
-            <label className="form-label"
-            htmlFor="assignedMembers">
-                assigned members
-            </label>
-            <Field type="text"
-            className="form-control"
-            name ="assignedMembers"
-            id="assignedMembers"
+            name ="memberName"
+            id="memberName"
             />
             </div>
         </Form>
@@ -78,7 +45,7 @@ const AddTask = () =>{
         </Modal.Body>
         <Modal.Footer className="d-flex justify-content-between align-items-center">
           <Button className="rounded-pill px-4 btn-primary" type="submit" onClick={handleClose}>
-            Login
+            Add
           </Button>
           <Button className="rounded-pill px-4" variant="outline-dark" onClick={handleClose}>
             Close
@@ -89,4 +56,4 @@ const AddTask = () =>{
   );
 }
 
-export default AddTask;
+export default AddMember;

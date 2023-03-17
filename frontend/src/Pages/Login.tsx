@@ -46,7 +46,7 @@ const Login = () => {
                 </label>
             </div>
             </div>
-        <Button type="submit" variant="primary">
+        <Button className="px-3" type="submit" variant="primary">
             Login
         </Button>
         </Form>

@@ -12,7 +12,7 @@ import {
         <Row className="justify-content-center">
           <h1 className="my-5">
             Easily manage projects with
-            <span className="text-primary d-inline-block">
+            <span className="text-primary d-inline-block ps-2">
              Pro</span>ject
             <span className="text-primary d-inline-block px-2">
                Manager
