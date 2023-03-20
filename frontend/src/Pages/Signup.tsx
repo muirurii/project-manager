@@ -11,7 +11,7 @@ interface FormTypes {
 }
 
 const SignUp = () => {
-  const [mutate, { data, loading, error, reset }] = useMutation(ADD_USER);
+  const [mutate, { data, error }] = useMutation(ADD_USER);
 
   const validate = (values: FormTypes) => {
     const errors: any = {};

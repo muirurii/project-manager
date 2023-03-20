@@ -18,4 +18,5 @@ const ADD_USER = gql`
     }
 `
 
-export {ADD_USER};   
+
+export {ADD_USER};

@@ -1,17 +1,17 @@
 import { CardGroup } from "react-bootstrap"
 import ProjectCard from "../components/Projects/ProjectCard"
-import { useQuery } from "@apollo/client";
-import {GET_PROJECTS} from "../queries/projectQueries";
+// import { useQuery } from "@apollo/client";
+// import {GET_PROJECTS} from "../queries/projectQueries";
 
 const Projects = () => {
-  const {loading,error,data} = useQuery(GET_PROJECTS);
+  // const {loading,error,data} = useQuery(GET_PROJECTS);
 
-  if(loading) return <p>Loading</p>
-  if(error){
-    console.log(error)
-    return <p>Error</p>
-  }
-  console.log(data);
+  // if(loading) return <p>Loading</p>
+  // if(error){
+    // console.log(error)
+    // return <p>Error</p>
+  // }
+  // console.log(data);
 
   return (
     <div className="container">
