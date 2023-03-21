@@ -2,15 +2,7 @@ const User = require("../../db/Models/User");
 const Project = require("../../db/Models/Project");
 const Task = require("../../db/Models/Task");
 const bcrypt = require("bcrypt");
-const { GraphQLError } = require("graphql");
-
-const customError = (message, code) => {
-    throw new GraphQLError(message, {
-        extensions: {
-            code,
-        },
-    });
-};
+const { customError } = require("../Errors");
 
 exports.addUser = async(parent, args) => {
     const { username, email, password, repeatPassword } = args.input;

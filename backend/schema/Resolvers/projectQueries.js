@@ -1,17 +1,13 @@
+const Project = require("../../db/Models/Project");
+
 const ProjectQueries = {
-    getProject: () => {
-        return {
-            projectName: "Hello",
-            _id: "44",
-            description: "String!",
-            creatorId: "ID!",
-            admins: ["User!"],
-            assignedUsers: ["User!"],
-            status: "String!",
-            estimatedHours: "Int!",
-            tasks: ["Task!"],
-            createdAt: " String!"
-        };
+    getProject: async(parent, args) => {
+
+        const { projectId } = args;
+        const project = await Project.findById(projectId);
+
+        return project;
+
     },
     getProjects: () => {
         return [{ projectName: "Hello" }];

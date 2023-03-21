@@ -14,7 +14,7 @@ const typeDefs = gql `
     _id: ID!
     projectName: String!
     description: String!
-    creatorId: ID!
+    creatorId: User!
     admins: [User!]!
     assignedUsers: [User!]!
     status: String!
@@ -28,7 +28,7 @@ const typeDefs = gql `
     taskName: String!
     projectId: String!
     description: String!
-    creatorId: ID!
+    creatorId: User!
     assignedUsers: [User!]!
     pictureURL: String!
     cloudinaryID: String!
@@ -41,17 +41,22 @@ const typeDefs = gql `
   type Comment {
     _id: ID!
     body: String!
-    creatorId: ID!
+    creatorId: User!
     taskId: String!
     replies: [Comment!]!
     createdAt: String!
   }
 
-  input UserInput {
+  input NewUserInput {
     username: String!
     email: String!
     password: String!
     repeatPassword: String!
+  }
+
+  input LoginUserInput {
+    username: String!
+    password: String!
   }
 
   input ProjectInput {
@@ -72,7 +77,7 @@ const typeDefs = gql `
   #Queries
 
   type Query {
-    getUser(_id: ID!): User!
+    getUser(input: LoginUserInput): User!
     getUsers: [User!]!
     getProject: Project!
     getProjects: [Project!]!
@@ -81,7 +86,7 @@ const typeDefs = gql `
   }
 
   type Mutation {
-    addUser(input: UserInput): User!
+    addUser(input: NewUserInput): User!
     addProject(input: ProjectInput): Project!
     addTask(input: TaskInput): Task!
   }
