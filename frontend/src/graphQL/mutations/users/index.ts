@@ -1,6 +1,8 @@
 import {gql} from "@apollo/client";
+import {USER_FIELDS} from "../../fragments";
 
 const ADD_USER = gql`
+        ${USER_FIELDS}
     mutation addUser(
         $username:String!,
         $email:String!,
@@ -9,11 +11,7 @@ const ADD_USER = gql`
     ) {
         addUser(input:{username:$username,email:$email,
         password:$password,repeatPassword:$repeatPassword}){
-            _id
-            username
-            email
-            picture,
-            createdAt
+            ...userFields
         }
     }
 `

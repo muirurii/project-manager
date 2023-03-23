@@ -48,7 +48,7 @@ const NewProject = () => {
           await mutate({
             variables:{
               ...values,
-              creatorId:"2"
+              creatorId:"641b48c7de5d38342dccb761"
             }
           })
           setSubmitting(false);
@@ -63,7 +63,7 @@ const NewProject = () => {
           ) : null}
           {data ? (
             <Alert className="p-2" variant="success">
-              Log in successful
+              Project created successfully
             </Alert>
           ) : null}
           <div className="mb-3">
@@ -113,7 +113,7 @@ const NewProject = () => {
               estimated hours
             </label>
             <Field
-              type="estimatedHours"
+              type="number"
               className="form-control"
               id="estimatedHours"
               name="estimatedHours"

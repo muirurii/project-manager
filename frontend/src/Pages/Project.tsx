@@ -1,8 +1,12 @@
 import { Badge, Card } from "react-bootstrap";
 import TaskList from "../components/Projects/TaskList";
 import AddMember from "../components/Projects/AddMember";
+import {useQuery} from "@apollo/client";
 
 const Project = () => {
+
+  // const {loading,}
+
   return (
     <div className="container">
         <h1 className="mt-5 mb-3">Project One</h1>

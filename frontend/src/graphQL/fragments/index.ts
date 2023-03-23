@@ -10,15 +10,23 @@ export const USER_FIELDS = gql`
   }
 `;
 
-export const PRODUCT_FIELDS = gql`
+export const PROJECT_FIELDS = gql`
 
   fragment projectFields on Project {
     _id
     projectName
     description
-    creatorId
     estimatedHours
-    status
   }
+
+`
+
+export const TASK_FIELDS = gql`
+    fragment taskFields on Task {
+      _id
+      taskName
+      description
+      estimatedHours
+    }
 
 `
