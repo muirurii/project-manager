@@ -8,6 +8,7 @@ export const ADD_TASK = gql`
     $description: String!
     $projectId: ID!
     $creatorId: ID!
+    $assignedUsers:String!
     $estimatedHours: Int!
   ) {
     addTask(
@@ -16,9 +17,12 @@ export const ADD_TASK = gql`
         description: $description
         projectId: $projectId
         creatorId: $creatorId
+        assignedUsers: $assignedUsers
         estimatedHours: $estimatedHours
       }
-    )
+    ){
+
     ...taskFields
+  }
   }
 `;

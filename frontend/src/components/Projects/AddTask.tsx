@@ -8,7 +8,7 @@ interface FormTypes {
   taskName:string,
   description:string,
   estimatedHours:number,
-  assignedUser: string
+  assignedUsers: string
 }
 
 const AddTask = () =>{
@@ -17,8 +17,7 @@ const AddTask = () =>{
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [mutate,{loading,error,data}] = useMutation(ADD_TASK);
-
+  const [mutate,{error,data}] = useMutation(ADD_TASK);
 
   const validate = (values:FormTypes)=>{
       const errors:any = {};
@@ -32,8 +31,8 @@ const AddTask = () =>{
       if(!values.estimatedHours){
         errors.estimatedHours = "please enter estimated hours"
       }
-      if(!values.assignedUser){
-        errors.assignedUser = "please select a user"
+      if(!values.assignedUsers){
+        errors.assignedUsers = "please select a user"
       }
 
       return errors;
@@ -55,20 +54,19 @@ const AddTask = () =>{
             taskName:"",
             description:"",
             estimatedHours:0,
-            assignedUser:""
+            assignedUsers:"6414a81b9a5af026d722011b"
         }}
         validate={validate}
-        onSubmit= {(values,{setSubmitting}) =>{
+        onSubmit= {async (values,{setSubmitting}) =>{
             setSubmitting(true);
-            mutate({
+           const {data} = await mutate({
               variables:{
                 ...values,
                 creatorId:"6414a81b9a5af026d722011b",
-                assignedUser:"6414a81b9a5af026d722011b",
                 projectId:"641b4a17de5d38342dccb763"
               }
             })
-            console.log(values);
+            console.log(data);
             setSubmitting(false);
         }}
         >
@@ -80,7 +78,7 @@ const AddTask = () =>{
           ) : null}
           {data ? (
             <Alert className="p-2" variant="success">
-              Log in successful
+              Task added successfully
             </Alert>
           ) : null}
             <div className="mb-3">
@@ -124,26 +122,29 @@ const AddTask = () =>{
             </div>
             <div className="mb-3">
             <label className="form-label"
-            htmlFor="assignedMembers">
+            htmlFor="assignedUsers">
                 assigned members
             </label>
             <Field type="text"
             className="form-control"
-            name ="assignedMembers"
-            id="assignedMembers"
+            name ="assignedUsers"
+            id="assignedUsers"
             />
+            <Alert className="p-0 text-danger mt-1" variant="light">
+              <ErrorMessage name="assignedUsers" />
+            </Alert>
             </div>
-        </Form>
-        </Formik>
-        </Modal.Body>
         <Modal.Footer className="d-flex justify-content-between align-items-center">
-          <Button className="rounded-pill px-4 btn-primary" type="submit" onClick={handleClose}>
-            Login
+          <Button className="rounded-pill px-4 btn-primary" type="submit">
+            Add task
           </Button>
           <Button className="rounded-pill px-4" variant="outline-dark" onClick={handleClose}>
             Close
           </Button>
         </Modal.Footer>
+        </Form>
+        </Formik>
+        </Modal.Body>
       </Modal>
     </>
   );

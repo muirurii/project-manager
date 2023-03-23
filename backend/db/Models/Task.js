@@ -18,7 +18,7 @@ const TaskSchema = new mongoose.Schema({
         ref: "User",
         required: true,
     },
-    assignedMembers: {
+    assignedUsers: {
         type: [mongoose.SchemaTypes.ObjectId],
         ref: "User",
         default: []

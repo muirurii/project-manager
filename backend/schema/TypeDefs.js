@@ -71,6 +71,7 @@ const typeDefs = gql `
     projectId:ID!,
     description:String!,
     creatorId:ID!,
+    assignedUsers: String,
     estimatedHours:Int!
   }
 

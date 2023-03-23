@@ -49,7 +49,7 @@ exports.addProject = async(parent, args) => {
     return project;
 };
 exports.addTask = async(parent, args) => {
-    const { taskName, projectId, description, creatorId, estimatedHours } =
+    const { taskName, projectId, description, creatorId, assignedUsers, estimatedHours } =
     args.input;
 
     const task = await Task.create({
@@ -57,6 +57,7 @@ exports.addTask = async(parent, args) => {
         projectId,
         description,
         creatorId,
+        assignedUsers: [assignedUsers],
         estimatedHours,
     });
 
