@@ -75,7 +75,8 @@ const typeDefs = gql `
   }
 
   input AddMember {
-      userId: ID!
+      username: String!
+      projectId: ID!
     }
 
   #Queries
@@ -90,10 +91,10 @@ const typeDefs = gql `
   }
 
   type Mutation {
-    addUser(input: NewUserInput): User!
-    addProject(input: ProjectInput): Project!
-    addTask(input: TaskInput): Task!
-    addMember(input:AddMember!): Project!
+    addUser(input: NewUserInput!): User!
+    addProject(input: ProjectInput!): Project!
+    addTask(input: TaskInput!): Task!
+    addMember(input: AddMember!): Project!
   }
 `;
 

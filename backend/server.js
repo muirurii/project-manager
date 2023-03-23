@@ -13,7 +13,7 @@ const { typeDefs } = require("./schema/TypeDefs");
 const { getTask, getTasks } = require("./schema/Resolvers/taskQueries")
 const { getUser, getUsers } = require("./schema/Resolvers/userQueries")
 const { getProject, getProjects } = require("./schema/Resolvers/projectQueries")
-const { addUser, addProject, addTask,addMember } = require("./schema/Mutations")
+const { addUser, addProject, addTask, addMember } = require("./schema/Mutations")
 
 const app = express();
 connection();

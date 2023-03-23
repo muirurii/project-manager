@@ -65,10 +65,22 @@ exports.addTask = async(parent, args) => {
 
 exports.addMember = async(parent, args) => {
 
-    const { userId, projectId } = args.input;
+    const { username, projectId } = args.input;
+    const user = await User.findOne({ username });
+
+    if (user === null) {
+        return customError("user not found", "BAD_USER_INPUT");
+    }
     const project = await Project.findById(projectId);
-    project.members.push(userId);
+
+    if (project === null) {
+        return customError("project not found", "BAD_USER_INPUT");
+    }
+
+    project.members.push(user._id);
     await project.save();
+    user.projects.push(project._id);
+    await user.save();
 
     return project;
 }

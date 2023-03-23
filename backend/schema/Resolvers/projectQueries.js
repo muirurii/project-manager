@@ -9,6 +9,7 @@ exports.getProject = async(parent, args) => {
 
 }
 
+
 exports.getProjects = async() => {
     const projects = await Project.find();
     return projects;

@@ -22,7 +22,7 @@ const Projects = () => {
       <h1 className="my-4">Projects</h1>
       <CardGroup className="flex gap-4">
         {
-          projectsData.map((project)=> <ProjectCard project={project} />)
+          projectsData.map((project)=> <ProjectCard key={project._id} project={project} />)
         }
       </CardGroup>
     </div>

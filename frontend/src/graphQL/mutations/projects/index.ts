@@ -20,3 +20,23 @@ export const ADD_PROJECT = gql`
     }
   }
 `;
+
+export const ADD_MEMBER = gql`
+
+    ${PROJECT_FIELDS}
+
+    mutation addMember(
+      $username:String!,
+      $projectId: ID!
+    ){
+      addMember (
+       input:{
+        username:$username,
+        projectId:$projectId
+       }
+      ){
+        ...projectFields
+      }
+    }
+
+`
