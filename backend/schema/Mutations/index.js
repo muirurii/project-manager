@@ -62,3 +62,13 @@ exports.addTask = async(parent, args) => {
 
     return task;
 };
+
+exports.addMember = async(parent, args) => {
+
+    const { userId, projectId } = args.input;
+    const project = await Project.findById(projectId);
+    project.members.push(userId);
+    await project.save();
+
+    return project;
+}

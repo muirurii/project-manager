@@ -1,10 +1,7 @@
-const TaskQueries = {
-    getTask: () => {
-        return "Hello";
-    },
-    getTasks: () => {
-        return "Hello";
-    },
+exports.getTask = () => {
+    return "Hello";
 }
 
-module.exports = TaskQueries;
+exports.getTasks = () => {
+    return "Hello";
+}

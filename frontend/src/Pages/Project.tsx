@@ -2,14 +2,25 @@ import { Badge, Card } from "react-bootstrap";
 import TaskList from "../components/Projects/TaskList";
 import AddMember from "../components/Projects/AddMember";
 import {useQuery} from "@apollo/client";
+import { GET_PROJECT } from "../graphQL/queries/projects";
+import { ProjectTypes } from "../Types";
 
 const Project = () => {
 
-  // const {loading,}
+  const {loading, data, error} = useQuery(GET_PROJECT,{
+    variables:{
+      projectId:"641b4a17de5d38342dccb763"
+    }
+  });
+
+  if (loading) return <p>Loading</p>
+  if (error) return <p>Error</p>
+
+  const project = data as ProjectTypes;
 
   return (
     <div className="container">
-        <h1 className="mt-5 mb-3">Project One</h1>
+        <h1 className="mt-5 mb-3">{project.projectName}</h1>
         <p className="">Created by user1 on 1st March 2020</p>
         <div className="mb-2 d-flex gap-2 align-items-center mb-4">
           <span>
@@ -23,7 +34,7 @@ const Project = () => {
             <Card.Img variant="top" src="/img.png" />
             <Card.Body>
                <Card.Text>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus pariatur aperiam numquam tempora provident molestiae qui minima, aspernatur quisquam id? Qui doloribus molestias consequatur ad reprehenderit corporis expedita accusantium voluptates.
+                  {project.description}
                 </Card.Text>
             </Card.Body>
         </Card>

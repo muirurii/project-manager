@@ -74,12 +74,16 @@ const typeDefs = gql `
     estimatedHours:Int!
   }
 
+  input AddMember {
+      userId: ID!
+    }
+
   #Queries
 
   type Query {
     getUser(input: LoginUserInput): User!
     getUsers: [User!]!
-    getProject: Project!
+    getProject(projectId:ID!): Project!
     getProjects: [Project!]!
     getTask: Task!
     getTasks: [Task!]!
@@ -89,6 +93,7 @@ const typeDefs = gql `
     addUser(input: NewUserInput): User!
     addProject(input: ProjectInput): Project!
     addTask(input: TaskInput): Task!
+    addMember(input:AddMember!): Project!
   }
 `;
 

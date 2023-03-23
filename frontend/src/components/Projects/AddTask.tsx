@@ -1,13 +1,43 @@
 import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import { Formik,Field,Form } from 'formik';
+import { Alert,Button,Modal } from 'react-bootstrap';
+import { Formik,Field,Form,ErrorMessage } from 'formik';
+import { useMutation } from '@apollo/client';
+import { ADD_TASK } from '../../graphQL/mutations/tasks';
+
+interface FormTypes {
+  taskName:string,
+  description:string,
+  estimatedHours:number,
+  assignedUser: string
+}
 
 const AddTask = () =>{
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [mutate,{loading,error,data}] = useMutation(ADD_TASK);
+
+
+  const validate = (values:FormTypes)=>{
+      const errors:any = {};
+
+      if(!values.taskName){
+        errors.taskName = "please enter a task name"
+      }
+      if(!values.description){
+        errors.description = "please enter a description"
+      }
+      if(!values.estimatedHours){
+        errors.estimatedHours = "please enter estimated hours"
+      }
+      if(!values.assignedUser){
+        errors.assignedUser = "please select a user"
+      }
+
+      return errors;
+  }
 
   return (
     <>
@@ -24,14 +54,35 @@ const AddTask = () =>{
          initialValues= {{
             taskName:"",
             description:"",
-            estimatedHours:"",
+            estimatedHours:0,
             assignedUser:""
         }}
+        validate={validate}
         onSubmit= {(values,{setSubmitting}) =>{
+            setSubmitting(true);
+            mutate({
+              variables:{
+                ...values,
+                creatorId:"6414a81b9a5af026d722011b",
+                assignedUser:"6414a81b9a5af026d722011b",
+                projectId:"641b4a17de5d38342dccb763"
+              }
+            })
             console.log(values);
+            setSubmitting(false);
         }}
         >
             <Form>
+            {error ? (
+            <Alert className="p-2" variant="danger">
+              {error.message}
+            </Alert>
+          ) : null}
+          {data ? (
+            <Alert className="p-2" variant="success">
+              Log in successful
+            </Alert>
+          ) : null}
             <div className="mb-3">
             <label className="form-label"
             htmlFor="taskName">
@@ -42,6 +93,9 @@ const AddTask = () =>{
             name ="taskName"
             id="taskName"
             />
+            <Alert className="p-0 text-danger mt-1" variant="light">
+              <ErrorMessage name="taskName" />
+            </Alert>
             </div>
             <div className="mb-3">
                 <label className="form-label" htmlFor="description">description</label>
@@ -50,17 +104,23 @@ const AddTask = () =>{
                 id="description"
                 name ="description"
                 />
+                <Alert className="p-0 text-danger mt-1" variant="light">
+              <ErrorMessage name="description" />
+            </Alert>
             </div>
             <div className="mb-3">
             <label className="form-label"
             htmlFor="estimatedHours">
                 estimated hours
             </label>
-            <Field type="text"
+            <Field type="number"
             className="form-control"
             name ="estimatedHours"
             id="estimatedHours"
             />
+            <Alert className="p-0 text-danger mt-1" variant="light">
+              <ErrorMessage name="estimatedHours" />
+            </Alert>
             </div>
             <div className="mb-3">
             <label className="form-label"
