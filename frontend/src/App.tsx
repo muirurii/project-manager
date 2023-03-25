@@ -10,7 +10,7 @@ import Layout from './components/Layout';
 import {ApolloProvider,ApolloClient,InMemoryCache,createHttpLink} from "@apollo/client";
 import {setContext} from "@apollo/client/link/context";
 
-const link = createHttpLink({
+const httpLink = createHttpLink({
   uri:"http://localhost:5000/graphql",
   credentials:"include"
 });
@@ -22,11 +22,11 @@ const authLink = setContext((_,{headers})=>{
     ...headers,
     authorization: token ? `Bearer ${token}` : ""
   }
-})
+});
 
 
 const client = new ApolloClient({
-  link,
+  link:httpLink,
   cache: new InMemoryCache(),
 });
 

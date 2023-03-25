@@ -1,7 +1,7 @@
 import {gql} from "@apollo/client";
 import { USER_FIELDS } from "../../fragments";
 
-const GET_USER = gql`
+export const GET_USER = gql`
     ${USER_FIELDS}
     query getUser(
         $username:String!,
@@ -12,5 +12,11 @@ const GET_USER = gql`
         }
     }
 `
-
-export {GET_USER};
+export const REFRESH_USER = gql`
+    ${USER_FIELDS}
+    query refreshUser{
+        refreshUser{
+            ...userFields
+        }
+    }
+`

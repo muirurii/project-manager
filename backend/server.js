@@ -10,18 +10,14 @@ const PORT = process.env.PORT || 5000;
 const connection = require("./db/config");
 const { ApolloServer } = require("apollo-server-express");
 const { typeDefs } = require("./schema/TypeDefs");
-const { getTask, getTasks } = require("./schema/Resolvers/taskQueries")
-const { getUser, getUsers } = require("./schema/Resolvers/userQueries")
-const { getProject, getProjects } = require("./schema/Resolvers/projectQueries")
-const { addUser, addProject, addTask, addMember } = require("./schema/Mutations")
+const { getTask, getTasks } = require("./schema/Resolvers/taskQueries");
+const { getUser, getUsers, refreshUser } = require("./schema/Resolvers/userQueries");
+const { getProject, getProjects } = require("./schema/Resolvers/projectQueries");
+const { addUser, addProject, addTask, addMember } = require("./schema/Mutations");
+const { verifyToken } = require("./auth/token");
 
 const app = express();
 connection();
-
-const myMiddleware = (req, res, next) => {
-    console.log('Middleware function running!');
-    next();
-};
 
 app.use(cookieParser());
 
@@ -43,7 +39,7 @@ const corsOptions = {
     credentials: true,
 };
 
-app.use(myMiddleware);
+// app.use(verifyToken);
 
 const startServer = async() => {
     const server = new ApolloServer({
@@ -52,6 +48,7 @@ const startServer = async() => {
             Query: {
                 getUser,
                 getUsers,
+                refreshUser,
                 getProject,
                 getProjects,
                 getTask,

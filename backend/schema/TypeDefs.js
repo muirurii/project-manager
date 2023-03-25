@@ -85,6 +85,7 @@ const typeDefs = gql `
   type Query {
     getUser(input: LoginUserInput): User!
     getUsers: [User!]!
+    refreshUser:User!
     getProject(projectId:ID!): Project!
     getProjects: [Project!]!
     getTask: Task!
