@@ -10,10 +10,7 @@ const PORT = process.env.PORT || 5000;
 const connection = require("./db/config");
 const { ApolloServer } = require("apollo-server-express");
 const { typeDefs } = require("./schema/TypeDefs");
-const { getTask, getTasks } = require("./schema/Resolvers/taskQueries");
-const { getUser, getUsers, refreshUser } = require("./schema/Resolvers/userQueries");
-const { getProject, getProjects } = require("./schema/Resolvers/projectQueries");
-const { addUser, addProject, addTask, addMember } = require("./schema/Mutations");
+const resolvers = require("./schema/Resolvers");
 const { verifyToken } = require("./auth/token");
 
 const app = express();
@@ -39,28 +36,10 @@ const corsOptions = {
     credentials: true,
 };
 
-// app.use(verifyToken);
-
 const startServer = async() => {
     const server = new ApolloServer({
         typeDefs,
-        resolvers: {
-            Query: {
-                getUser,
-                getUsers,
-                refreshUser,
-                getProject,
-                getProjects,
-                getTask,
-                getTasks,
-            },
-            Mutation: {
-                addUser,
-                addProject,
-                addTask,
-                addMember,
-            }
-        },
+        resolvers,
         context: ({ req, res }) => ({ req, res }),
         plugins: [
             ApolloServerPluginLandingPageGraphQLPlayground,

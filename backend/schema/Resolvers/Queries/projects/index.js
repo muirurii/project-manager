@@ -1,4 +1,4 @@
-const Project = require("../../db/Models/Project");
+const Project = require("../../../../db/Models/Project");
 
 exports.getProject = async(parent, args) => {
 

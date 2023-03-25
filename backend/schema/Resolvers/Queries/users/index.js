@@ -1,7 +1,7 @@
-const User = require("../../db/Models/User");
+const User = require("../../../../db/Models/User");
 const bcrypt = require("bcrypt");
-const { customError } = require("../Errors");
-const { setCookie, refreshToken } = require("../../auth/token");
+const { customError } = require("../../../Errors");
+const { setCookie, refreshToken } = require("../../../../auth/token");
 
 exports.getUser = async(parent, args, { res }) => {
 

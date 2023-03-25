@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const { customError } = require("../../schema/Errors");
 const { ACCESS_SECRET, REFRESH_SECRET } = process.env;
 
 const getToken = ({ username, _id }, tokenType) => jwt.sign({ username, _id }, tokenType, { expiresIn: "1d" });
@@ -34,27 +35,24 @@ exports.refreshToken = (req) => {
     })
 }
 
-exports.verifyToken = (req, res, next) => {
+exports.verifyToken = (req) => {
     const authorization = req.headers.authorization;
 
     if (!authorization || !authorization.startsWith('Bearer')) {
         req.auth = {}
-        next();
     }
 
     const token = authorization.split(' ')[1];
 
     jwt.verify(token, ACCESS_SECRET, (error, decoded) => {
         if (error) {
-            req.auth = {};
-            next();
+            customError("not authenticated", "BAD_USER_INPUT");
         } else {
             const { _id, username } = decoded;
             req.auth = {
                 authId: _id,
                 authName: username,
             };
-            next();
         }
     })
 
