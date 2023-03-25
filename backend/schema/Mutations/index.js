@@ -3,6 +3,7 @@ const Project = require("../../db/Models/Project");
 const Task = require("../../db/Models/Task");
 const bcrypt = require("bcrypt");
 const { customError } = require("../Errors");
+const { setCookie } = require("../../auth/token");
 
 exports.addUser = async(parent, args) => {
     const { username, email, password, repeatPassword } = args.input;
@@ -33,6 +34,8 @@ exports.addUser = async(parent, args) => {
         email,
         password: hashedPassword,
     });
+
+    setCookie(res, { username, _id: user._id });
 
     return user;
 };

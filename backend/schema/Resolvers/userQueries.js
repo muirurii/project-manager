@@ -1,36 +1,38 @@
 const User = require("../../db/Models/User");
 const bcrypt = require("bcrypt");
 const { customError } = require("../Errors");
+const { setCookie } = require("../../auth/token");
 
-const UserQueries = {
-    getUser: async(parent, args) => {
+exports.getUser = async(parent, args, { res }) => {
 
-        const { username, password } = args.input;
-        const user = await User.findOne({ username });
+    const { username, password } = args.input;
+    const user = await User.findOne({ username });
 
-        if (!user) {
-            return customError("account not registered", "BAD_USER_INPUT");
-        }
+    if (!user) {
+        return customError("account not registered", "BAD_USER_INPUT");
+    }
 
-        const matchPasswords = await bcrypt.compare(password, user.password);
-        if (!matchPasswords) {
-            return customError("wrong credentials", "BAD_USER_INPUT");
-        }
-        return user;
-    },
-    viewUser: async() => {
-        const { username } = args;
-        const user = await User.findOne({ username });
+    const matchPasswords = await bcrypt.compare(password, user.password);
+    if (!matchPasswords) {
+        return customError("wrong credentials", "BAD_USER_INPUT");
+    }
+    console.log(res)
+    setCookie(res, { username, _id: user._id });
 
-        if (!user) {
-            return customError("account not registered", "BAD_USER_INPUT");
-        }
-
-        return user;
-    },
-    getUsers: () => {
-        return users;
-    },
+    return user;
 }
 
-module.exports = UserQueries;
+exports.viewUser = async() => {
+    const { username } = args;
+    const user = await User.findOne({ username });
+
+    if (!user) {
+        return customError("account not registered", "BAD_USER_INPUT");
+    }
+
+    return user;
+}
+
+exports.getUsers = () => {
+    return [];
+}

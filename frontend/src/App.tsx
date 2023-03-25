@@ -8,11 +8,22 @@ import Projects from './Pages/Projects';
 import Project from './Pages/Project';
 import Layout from './components/Layout';
 import {ApolloProvider,ApolloClient,InMemoryCache,createHttpLink} from "@apollo/client";
-
+import {setContext} from "@apollo/client/link/context";
 
 const link = createHttpLink({
   uri:"http://localhost:5000/graphql",
+  credentials:"include"
+});
+
+const token:string = "";
+
+const authLink = setContext((_,{headers})=>{
+   return{
+    ...headers,
+    authorization: token ? `Bearer ${token}` : ""
+  }
 })
+
 
 const client = new ApolloClient({
   link,

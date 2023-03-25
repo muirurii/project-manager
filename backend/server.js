@@ -5,7 +5,7 @@ const path = require("path");
 dotenv.config({
     path: path.join(__dirname, '../', ".env")
 });
-const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const PORT = process.env.PORT || 5000;
 const connection = require("./db/config");
 const { ApolloServer } = require("apollo-server-express");
@@ -17,7 +17,33 @@ const { addUser, addProject, addTask, addMember } = require("./schema/Mutations"
 
 const app = express();
 connection();
-// app.use(cors());
+
+const myMiddleware = (req, res, next) => {
+    console.log('Middleware function running!');
+    next();
+};
+
+app.use(cookieParser());
+
+const allowedOrigins = [
+    "http://localhost:3000",
+    "http://localhost:5000",
+    undefined
+];
+
+const corsOptions = {
+    origin: (origin, callback) => {
+        if (allowedOrigins.includes(origin) || origin === undefined) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by cors"));
+        }
+    },
+    optionSuccessStatus: 200,
+    credentials: true,
+};
+
+app.use(myMiddleware);
 
 const startServer = async() => {
     const server = new ApolloServer({
@@ -38,13 +64,14 @@ const startServer = async() => {
                 addMember,
             }
         },
+        context: ({ req, res }) => ({ req, res }),
         plugins: [
-            ApolloServerPluginLandingPageGraphQLPlayground
+            ApolloServerPluginLandingPageGraphQLPlayground,
         ]
     });
 
     await server.start();
-    server.applyMiddleware({ app });
+    server.applyMiddleware({ app, cors: corsOptions });
 
     app.listen(PORT, () => console.log(`graphql server started on ${server.graphqlPath}`));
 }
