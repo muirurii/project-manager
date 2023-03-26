@@ -6,6 +6,7 @@ export const USER_FIELDS = gql`
     username
     email
     picture
+    accessToken
     createdAt
   }
 `;

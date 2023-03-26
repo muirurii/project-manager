@@ -13,3 +13,12 @@ export interface TaskTypes {
   creatorId: string;
   estimatedHours: string;
 }
+
+export interface UserTypes {
+  _id:string;
+  username:string;
+  picture: string;
+  isLogged: boolean;
+  accessToken: string;
+  createdAt:string;
+}

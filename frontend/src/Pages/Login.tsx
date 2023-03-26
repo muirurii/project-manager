@@ -2,6 +2,8 @@ import { Button, Alert } from "react-bootstrap";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { GET_USER } from "../graphQL/queries/users";
 import { useLazyQuery } from "@apollo/client";
+import { useAppDispatch } from "../app/hooks";
+import { setUser } from "../features/user/userSlice";
 
 interface FormTypes {
   username: string;
@@ -10,6 +12,8 @@ interface FormTypes {
 
 const Login = () => {
   const [getUser, { data, error }] = useLazyQuery(GET_USER);
+
+  const dispatch = useAppDispatch();
 
   const validate = (values: FormTypes) => {
     const errors: any = {};
@@ -36,12 +40,17 @@ const Login = () => {
         validate={validate}
         onSubmit={async (values, { setSubmitting }) => {
           setSubmitting(true);
-          await getUser({
+         const {data} = await getUser({
             variables: {
               ...values,
             },
           });
-          setSubmitting(false);
+
+          if(data){
+          console.log(data)
+          dispatch(setUser(data.getUser));
+        }
+        setSubmitting(false);
         }}
       >
         <Form>
