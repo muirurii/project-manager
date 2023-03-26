@@ -1,7 +1,7 @@
 const User = require("../../../../db/Models/User");
 const bcrypt = require("bcrypt");
 const { customError } = require("../../../Errors");
-const { setCookie, refreshToken } = require("../../../../auth/token");
+const { setCookie, refreshToken, getToken } = require("../../../../auth/token");
 
 exports.getUser = async(parent, args, { res }) => {
 
@@ -18,6 +18,8 @@ exports.getUser = async(parent, args, { res }) => {
     }
 
     setCookie(res, { username, _id: user._id });
+
+    user.accessToken = getToken({ username, _id: user._id }, process.env.ACCESS_SECRET);
 
     return user;
 }

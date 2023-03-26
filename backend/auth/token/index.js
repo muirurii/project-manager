@@ -3,6 +3,7 @@ const { customError } = require("../../schema/Errors");
 const { ACCESS_SECRET, REFRESH_SECRET } = process.env;
 
 const getToken = ({ username, _id }, tokenType) => jwt.sign({ username, _id }, tokenType, { expiresIn: "1d" });
+exports.getToken = getToken;
 
 exports.setCookie = (res, { username, _id }) => {
     res.cookie("proj_manager", getToken({ username, _id }, REFRESH_SECRET), {

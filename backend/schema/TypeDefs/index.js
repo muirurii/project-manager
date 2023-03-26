@@ -6,7 +6,8 @@ exports.typeDefs = gql `
     username: String!
     email: String!
     picture: String!
-    projects: [String!]!
+    accessToken: String!
+    projects: [ID!]!
     createdAt: String!
   }
 
