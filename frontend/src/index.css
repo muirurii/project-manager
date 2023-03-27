@@ -2,6 +2,23 @@
     --primary-color: #02727a;
 }
 
+body {
+    overflow-x: hidden;
+}
+
+.loader {
+    fill: var(--primary-color);
+    height: 40px;
+    width: 40px;
+    animation: loader 900ms infinite linear;
+}
+
+@keyframes loader {
+    to {
+        transform: rotateZ(360deg);
+    }
+}
+
 .btn-primary {
     background-color: var(--primary-color);
     border-radius: 300px;

@@ -2,6 +2,10 @@ import { Button, Alert } from "react-bootstrap";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useMutation } from "@apollo/client";
 import { ADD_PROJECT } from "../graphQL/mutations/projects";
+import { useAppSelector } from "../app/hooks";
+import { selectUser } from "../features/user/userSlice";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 interface FormTypes {
     projectName: string
@@ -13,6 +17,12 @@ interface FormTypes {
 const NewProject = () => {
 
   const [mutate,{data,error}] = useMutation(ADD_PROJECT);
+  const user = useAppSelector(selectUser);
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    if(!user.isLogged) navigate("/");
+  },[]);
 
   const validate = (values: FormTypes) => {
     const errors: any = {};
@@ -48,7 +58,7 @@ const NewProject = () => {
           await mutate({
             variables:{
               ...values,
-              creatorId:"641b48c7de5d38342dccb761"
+              creatorId:user._id
             }
           })
           setSubmitting(false);

@@ -5,17 +5,21 @@ import {GET_PROJECTS} from "../graphQL/queries/projects";
 import { ProjectTypes } from "../Types";
 import { useAppSelector } from "../app/hooks";
 import { selectUser } from "../features/user/userSlice";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Projects = () => {
   const {loading,error,data} = useQuery(GET_PROJECTS);
   const user = useAppSelector(selectUser);
+  const navigate = useNavigate();
 
-  console.log(user,"pro");
+  useEffect(()=>{
+    if(!user.isLogged) navigate("/");
+  },[]);
 
   if(loading) return <p>Loading</p>
   if(error){
-    console.log(error)
-    return <p>Error</p>
+    return <p>Error loading projects</p>
   }
   console.log(data);
 

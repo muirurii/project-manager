@@ -4,6 +4,10 @@ import AddMember from "../components/Projects/AddMember";
 import {useQuery} from "@apollo/client";
 import { GET_PROJECT } from "../graphQL/queries/projects";
 import { ProjectTypes } from "../Types";
+import { useAppSelector } from "../app/hooks";
+import { selectUser } from "../features/user/userSlice";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Project = () => {
 
@@ -12,6 +16,12 @@ const Project = () => {
       projectId:"641b4a17de5d38342dccb763"
     }
   });
+  const user = useAppSelector(selectUser)
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    if(!user.isLogged) navigate("/");
+  },[]);
 
   if (loading) return <p>Loading</p>
   if (error) return <p>Error</p>
