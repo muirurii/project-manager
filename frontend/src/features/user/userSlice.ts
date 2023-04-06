@@ -9,7 +9,7 @@ const initialState: UserTypes = {
   isLogged: false,
   accessToken: "",
   createdAt:"",
-  userProjects: []
+  projects: []
 };
 
 const userSlice = createSlice({

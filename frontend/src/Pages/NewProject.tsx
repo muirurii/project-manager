@@ -58,7 +58,7 @@ const NewProject = () => {
           await mutate({
             variables:{
               ...values,
-              creatorId:user._id
+              creator:user._id
             }
           })
           setSubmitting(false);

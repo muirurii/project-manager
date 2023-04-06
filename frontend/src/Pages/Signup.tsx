@@ -2,6 +2,8 @@ import { Alert, Button } from "react-bootstrap";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../graphQL/mutations/users";
+import { useDispatch } from "react-redux";
+import { setUser } from "../features/user/userSlice";
 
 interface FormTypes {
   username: string;
@@ -12,6 +14,7 @@ interface FormTypes {
 
 const SignUp = () => {
   const [mutate, { data, error }] = useMutation(ADD_USER);
+  const dispatch = useDispatch();
 
   const validate = (values: FormTypes) => {
     const errors: any = {};
@@ -52,7 +55,9 @@ const SignUp = () => {
               ...values,
             },
           });
-
+          if(data){
+            dispatch(setUser(data.getUser))
+          }
           console.log("success", data);
           setSubmitting(false);
         }}

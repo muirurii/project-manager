@@ -1,25 +1,29 @@
 export interface ProjectTypes {
   _id: string;
   projectName: string;
+  creator: string;
   description: string;
   estimatedHours: number;
 }
 
-export interface TaskTypes {
+
+export interface TaskTypes  {
   _id: string;
   taskName: string;
-  projectId: string;
+  project: ProjectTypes;
   description: string;
-  creatorId: string;
+  creator: UserBasicTypes;
   estimatedHours: string;
 }
 
-export interface UserTypes {
+export interface UserBasicTypes {
   _id:string;
   username:string;
   picture: string;
+}
+export interface UserTypes extends UserBasicTypes {
   isLogged: boolean;
   accessToken: string;
   createdAt:string;
-  userProjects: ProjectTypes[];
+  projects: ProjectTypes[];
 }

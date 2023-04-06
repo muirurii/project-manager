@@ -37,7 +37,7 @@ const Header = () => {
             <button className="nav-link text-dark py-3 d-flex align-items-center justify-content-center gap-2">
               <BiUser />
              <span>{user.username}</span>
-             <span>{user.userProjects.length}</span>
+             <span>{user.projects.length}</span>
             </button>
           </Nav.Item>
         ) : (

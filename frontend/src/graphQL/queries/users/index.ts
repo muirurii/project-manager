@@ -10,9 +10,10 @@ export const GET_USER = gql`
       picture
       accessToken
       createdAt
-      userProjects {
+      projects {
         _id
         projectName
+        creator
         description
         estimatedHours
         createdAt
@@ -29,9 +30,10 @@ export const REFRESH_USER = gql`
       picture
       accessToken
       createdAt
-      userProjects {
+      projects {
         _id
         projectName
+        creator
         description
         estimatedHours
         createdAt
