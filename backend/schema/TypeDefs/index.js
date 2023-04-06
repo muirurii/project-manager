@@ -7,7 +7,8 @@ exports.typeDefs = gql `
     email: String!
     picture: String!
     accessToken: String!
-    userProjects: [Project!]!
+    projects: [Project!]!
+    tasks:[Task!]!
     createdAt: String!
   }
 
@@ -15,7 +16,7 @@ exports.typeDefs = gql `
     _id: ID!
     projectName: String!
     description: String!
-    creatorId: User!
+    creator: User!
     admins: [User!]!
     assignedUsers: [User!]!
     status: String!
@@ -27,9 +28,9 @@ exports.typeDefs = gql `
   type Task {
     _id: ID!
     taskName: String!
-    projectId: String!
+    project: Project!
     description: String!
-    creatorId: User!
+    creator: User!
     assignedUsers: [User!]!
     pictureURL: String!
     cloudinaryID: String!
@@ -42,8 +43,8 @@ exports.typeDefs = gql `
   type Comment {
     _id: ID!
     body: String!
-    creatorId: User!
-    taskId: String!
+    creator: User!
+    task: String!
     replies: [Comment!]!
     createdAt: String!
   }
@@ -63,22 +64,22 @@ exports.typeDefs = gql `
   input ProjectInput {
     projectName: String
     description: String!
-    creatorId: ID!
+    creator: ID!
     estimatedHours: Int
   }
 
   input TaskInput {
     taskName:String!,
-    projectId:ID!,
+    project:ID!,
     description:String!,
-    creatorId:ID!,
+    creator:ID!,
     assignedUsers: String,
     estimatedHours:Int!
   }
 
   input AddMember {
       username: String!
-      projectId: ID!
+      project: ID!
     }
 
   #Queries
@@ -87,7 +88,7 @@ exports.typeDefs = gql `
     getUser(input: LoginUserInput): User!
     getUsers: [User!]!
     refreshUser:User!
-    getProject(projectId:ID!): Project!
+    getProject(project:ID!): Project!
     getProjects: [Project!]!
     getTask: Task!
     getTasks: [Task!]!

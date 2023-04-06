@@ -5,12 +5,12 @@ const CommentSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    creatorId: {
+    creator: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: "User",
         required: true,
     },
-    taskId: {
+    task: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: "Task",
         required: true,

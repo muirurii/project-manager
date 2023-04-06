@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const { customError } = require("../../../Errors");
 const { setCookie, getToken } = require("../../../../auth/token");
 
-exports.addUser = async(parent, args) => {
+exports.addUser = async(parent, args, { res }) => {
     const { username, email, password, repeatPassword } = args.input;
 
     if (password !== repeatPassword) {
@@ -16,7 +16,6 @@ exports.addUser = async(parent, args) => {
 
     if (duplicate) {
         const duplicateName = await User.findOne({ username });
-
         if (duplicateName) {
             customError("username already registered", "BAD_USER_INPUT");
         } else {

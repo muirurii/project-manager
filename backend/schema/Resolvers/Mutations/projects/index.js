@@ -3,12 +3,12 @@ const User = require("../../../../db/Models/User");
 const customError = require("../../../Errors");
 
 exports.addProject = async(parent, args) => {
-    const { projectName, description, creatorId, estimatedHours } = args.input;
+    const { projectName, description, creator, estimatedHours } = args.input;
 
     const project = await Project.create({
         projectName,
         description,
-        creatorId,
+        creator,
         estimatedHours,
     });
 

@@ -5,7 +5,7 @@ const TaskSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    projectId: {
+    project: {
         type: mongoose.SchemaTypes.ObjectId,
         required: true,
     },
@@ -13,7 +13,7 @@ const TaskSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    creatorId: {
+    creator: {
         type: mongoose.SchemaTypes.ObjectId,
         ref: "User",
         required: true,
