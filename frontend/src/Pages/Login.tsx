@@ -28,6 +28,11 @@ const Login = () => {
     return errors;
   };
 
+  if(data){
+    console.log(data)
+    dispatch(setUser(data.getUser));
+  }
+
   return (
     <div className="container">
       <h1 className="my-4">Login</h1>
@@ -45,11 +50,7 @@ const Login = () => {
               ...values,
             },
           });
-
-          if(data){
-          console.log(data)
-          dispatch(setUser(data.getUser));
-        }
+          console.log(data,"form")
         setSubmitting(false);
         }}
       >

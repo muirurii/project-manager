@@ -11,12 +11,12 @@ const Layout = ({ children }: { children: ReactNode }) => {
   const {loading,error,data} = useQuery(REFRESH_USER);
   const dispatch = useAppDispatch();
 
-console.log(data)
-console.log(error)
-
+  console.log(error)
+  
 if(loading) return <Loader height="100vh" width="100vw" />
 
 if(data){
+  console.log(data)
     const user = data.refreshUser as UserTypes;
     dispatch(setUser(user));
   }

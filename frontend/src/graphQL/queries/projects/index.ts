@@ -1,31 +1,22 @@
-import {gql} from "@apollo/client";
+import { gql } from "@apollo/client";
 import { PROJECT_FIELDS } from "../../fragments";
 
 export const GET_PROJECTS = gql`
-
-    ${PROJECT_FIELDS}
-
-    query getProjects {
-      getProjects{
-          ...projectFields
-      }  
-    }
-
-`
+  query getProjects {
+    getProjects {
+      _id
+    projectName
+    description
+    estimatedHours    }
+  }
+`;
 
 export const GET_PROJECT = gql`
-
-    ${PROJECT_FIELDS}
-
-    query getProject(
-      $projectId: ID!
-      ){
-      getProject(
-        projectId:$projectId
-      ){
-        ...projectFields
-      }
-    }
-
-
-`
+  query getProject($projectId: ID!) {
+    getProject(projectId: $projectId) {
+      _id
+    projectName
+    description
+    estimatedHours    }
+  }
+`;

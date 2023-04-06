@@ -6,18 +6,22 @@ import { GET_PROJECT } from "../graphQL/queries/projects";
 import { ProjectTypes } from "../Types";
 import { useAppSelector } from "../app/hooks";
 import { selectUser } from "../features/user/userSlice";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 
 const Project = () => {
 
+  const {projectId} = useParams();
+  console.log(projectId)
+
   const {loading, data, error} = useQuery(GET_PROJECT,{
     variables:{
-      projectId:"641b4a17de5d38342dccb763"
+      projectId
     }
   });
   const user = useAppSelector(selectUser)
   const navigate = useNavigate();
+
 
   useEffect(()=>{
     if(!user.isLogged) navigate("/");

@@ -21,4 +21,5 @@ export interface UserTypes {
   isLogged: boolean;
   accessToken: string;
   createdAt:string;
+  userProjects: ProjectTypes[];
 }

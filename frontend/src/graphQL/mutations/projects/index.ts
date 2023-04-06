@@ -2,7 +2,6 @@ import { gql } from "@apollo/client";
 import { PROJECT_FIELDS } from "../../fragments";
 
 export const ADD_PROJECT = gql`
-  ${PROJECT_FIELDS}
 
   mutation addProject(
     $projectName: String!
@@ -16,7 +15,10 @@ export const ADD_PROJECT = gql`
         creatorId:$creatorId,
         estimatedHours:$estimatedHours
     }) {
-      ...projectFields
+      _id
+    projectName
+    description
+    estimatedHours
     }
   }
 `;

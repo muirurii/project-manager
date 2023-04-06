@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ProjectTypes } from "../../Types";
 
 const ProjectCard = ({ project } :{project:ProjectTypes}) => {
+  console.log(project)
   return (
     <div>
         <Card bg="li" className="" style={{maxWidth:"400px"}}>
@@ -15,7 +16,7 @@ const ProjectCard = ({ project } :{project:ProjectTypes}) => {
             <Card.Text>
                 {project.description}
             </Card.Text>
-            <Link to="/project/projectId" className="btn btn-primary rounded-pill">
+            <Link to={`/project/${project._id}`} className="btn btn-primary rounded-pill">
                 View project</Link>
           </Card.Body>
         </Card>

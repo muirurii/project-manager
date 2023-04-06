@@ -8,7 +8,8 @@ const initialState: UserTypes = {
   picture: "",
   isLogged: false,
   accessToken: "",
-  createdAt:""
+  createdAt:"",
+  userProjects: []
 };
 
 const userSlice = createSlice({
