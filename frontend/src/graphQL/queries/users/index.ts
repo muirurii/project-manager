@@ -13,7 +13,6 @@ export const GET_USER = gql`
       projects {
         _id
         projectName
-        creator
         description
         estimatedHours
         createdAt
@@ -33,7 +32,6 @@ export const REFRESH_USER = gql`
       projects {
         _id
         projectName
-        creator
         description
         estimatedHours
         createdAt

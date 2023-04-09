@@ -49,7 +49,7 @@ const AddMember = () => {
               const { data } = await mutate({
                 variables: {
                   username:values.username,
-                  projectId: "641b4ab0de5d38342dccb765",
+                  project: "641b4ab0de5d38342dccb765",
                 },
               });
               console.log(data);

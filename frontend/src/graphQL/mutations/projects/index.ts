@@ -6,13 +6,13 @@ export const ADD_PROJECT = gql`
   mutation addProject(
     $projectName: String!
     $description: String!
-    $creatorId: ID!
+    $creator: ID!
     $estimatedHours: Int!
   ) {
     addProject(input:{
         projectName:$projectName,
         description:$description,
-        creatorId:$creatorId,
+        creator:$creator,
         estimatedHours:$estimatedHours
     }) {
       _id
