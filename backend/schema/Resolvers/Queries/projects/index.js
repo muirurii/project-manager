@@ -2,7 +2,7 @@ const Project = require("../../../../db/Models/Project");
 
 exports.getProject = async(parent, args) => {
 
-    const project = await Project.findById(args.project).populate("creator");
+    const project = await Project.findById(args.project).populate("creator").populate("tasks");
     return project;
 
 }

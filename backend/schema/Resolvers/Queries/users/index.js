@@ -46,7 +46,7 @@ exports.refreshUser = async(parent, args, { res, req }) => {
     return user;
 };
 
-exports.viewUser = async() => {
+exports.viewUser = async(_, args) => {
     const { username } = args;
     const user = await User.findOne({ username });
 
@@ -57,6 +57,12 @@ exports.viewUser = async() => {
     return user;
 };
 
-exports.getUsers = () => {
-    return [];
+exports.getUsers = async(_, args) => {
+    const users = await User.find()
+        .where("username")
+        .ne(args.username)
+        .where("projects")
+        .nin(args.project);
+
+    return users;
 };

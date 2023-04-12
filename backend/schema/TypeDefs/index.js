@@ -92,7 +92,7 @@ exports.typeDefs = gql `
 
   type Query {
     getUser(input: LoginUserInput): User!
-    getUsers: [User!]!
+    getUsers(username: String!, project: ID!): [UserBasic!]!
     refreshUser:User!
     getProject(project:ID!): Project!
     getProjects: [Project!]!

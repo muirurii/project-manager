@@ -8,12 +8,22 @@ exports.addProject = async(parent, args, { req }) => {
 
     const { projectName, description, creator, estimatedHours } = args.input;
 
+    const user = await User.findById(creator);
+
+    if (!user) {
+        return customError("account not registered", "BAD_USER_INPUT");
+    }
+
     const project = await Project.create({
         projectName,
         description,
         creator,
+        members: [creator],
         estimatedHours,
     });
+
+    user.projects.push(project._id);
+    await user.save();
 
     return project;
 };
@@ -30,6 +40,10 @@ exports.addMember = async(parent, args) => {
 
     if (project === null) {
         return customError("project not found", "BAD_USER_INPUT");
+    }
+
+    if (project.members.some(member => member._id === user._id)) {
+        return customError("Member already added", "BAD_USER_INPUT");
     }
 
     project.members.push(user._id);
