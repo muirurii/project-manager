@@ -1,8 +1,11 @@
+const { verifyToken } = require("../../../../auth/token");
 const Project = require("../../../../db/Models/Project");
 const User = require("../../../../db/Models/User");
 const customError = require("../../../Errors");
 
-exports.addProject = async(parent, args) => {
+exports.addProject = async(parent, args, { req }) => {
+    // verifyToken(req);
+
     const { projectName, description, creator, estimatedHours } = args.input;
 
     const project = await Project.create({

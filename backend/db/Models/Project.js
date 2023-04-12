@@ -26,7 +26,8 @@ const ProjectSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ["complete", "inprogress, late"],
+        enum: ["complete", "inprogress", "late"],
+        default: "inprogress"
     },
     estimatedHours: {
         type: Number,

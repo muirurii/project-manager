@@ -26,6 +26,7 @@ const TaskSchema = new mongoose.Schema({
     status: {
         type: String,
         enum: ["complete", "in progress, late"],
+        default: "inprogress"
     },
     estimatedHours: {
         type: Number,

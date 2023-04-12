@@ -12,13 +12,19 @@ exports.typeDefs = gql `
     createdAt: String!
   }
 
+  type UserBasic{
+    _id: ID!
+    username: String!
+    picture: String!
+  }
+
   type Project {
     _id: ID!
     projectName: String!
     description: String!
     creator: User!
-    admins: [User!]!
-    assignedUsers: [User!]!
+    admins: [UserBasic!]!
+    assignedUsers: [UserBasic!]!
     status: String!
     estimatedHours: Int!
     tasks: [Task!]!
@@ -30,8 +36,8 @@ exports.typeDefs = gql `
     taskName: String!
     project: Project!
     description: String!
-    creator: User!
-    assignedUsers: [User!]!
+    creator: UserBasic!
+    assignedUsers: [UserBasic!]!
     pictureURL: String!
     cloudinaryID: String!
     status: String!
@@ -43,7 +49,7 @@ exports.typeDefs = gql `
   type Comment {
     _id: ID!
     body: String!
-    creator: User!
+    creator: UserBasic!
     task: String!
     replies: [Comment!]!
     createdAt: String!
