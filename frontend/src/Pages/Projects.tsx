@@ -1,4 +1,4 @@
-import { CardGroup } from "react-bootstrap"
+import { Table } from "react-bootstrap"
 import ProjectCard from "../components/Projects/ProjectCard"
 import { useQuery } from "@apollo/client";
 import {GET_PROJECTS} from "../graphQL/queries/projects";
@@ -31,12 +31,24 @@ const Projects = () => {
 
   return (
     <div className="container">
-      <h1 className="my-4">Projects {user.username}</h1>
-      <CardGroup className="flex gap-4">
+      <h1 className="my-4">Your Projects</h1>
+      <Table className="" size="xl" bordered striped hover responsive="sm">
+        <thead className="bg-primary">
+          <tr>
+            <th>#</th>
+            <th>Project name</th>
+            <th>Creator</th>
+            <th>Date created</th>
+            <th>Status</th>
+            <th>View project</th>
+          </tr>
+        </thead>
+        <tbody>
         {
-          projectsData.map((project)=> <ProjectCard key={project._id} project={project} />)
+          projectsData.map((project,index)=> <ProjectCard key={project._id} project={project} index={++index} />)
         }
-      </CardGroup>
+        </tbody>
+      </Table>
     </div>
   )
 }

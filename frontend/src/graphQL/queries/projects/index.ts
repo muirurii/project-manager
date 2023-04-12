@@ -6,17 +6,28 @@ export const GET_PROJECTS = gql`
     getProjects {
       _id
     projectName
+    creator{
+      username
+      _id
+      picture
+    }
     description
-    estimatedHours    }
+    estimatedHours
+    status
+    createdAt
+    }
   }
 `;
 
 export const GET_PROJECT = gql`
-  query getProject($projectId: ID!) {
-    getProject(projectId: $projectId) {
+  query getProject($project: ID!) {
+    getProject(project: $project) {
       _id
     projectName
     description
-    estimatedHours    }
+    estimatedHours
+    status
+    createdAt
+    }
   }
 `;

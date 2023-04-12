@@ -16,7 +16,7 @@ const Project = () => {
 
   const {loading, data, error} = useQuery(GET_PROJECT,{
     variables:{
-      projectId
+      project:projectId
     }
   });
   const user = useAppSelector(selectUser)

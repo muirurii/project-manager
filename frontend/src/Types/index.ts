@@ -1,9 +1,11 @@
 export interface ProjectTypes {
   _id: string;
   projectName: string;
-  creator: string;
+  creator: UserBasicTypes;
   description: string;
   estimatedHours: number;
+  status:string;
+  createdAt:string;
 }
 
 

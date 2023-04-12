@@ -1,27 +1,39 @@
-import { Badge, Card } from "react-bootstrap";
+import { Badge } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { ProjectTypes } from "../../Types";
+import useDateFormatter from "../../customHooks/dateFormatter";
 
-const ProjectCard = ({ project } :{project:ProjectTypes}) => {
-  console.log(project)
+const ProjectCard = ({
+  project,
+  index,
+}: {
+  project: ProjectTypes;
+  index: number;
+}) => {
+  const date = useDateFormatter(project.createdAt);
+
   return (
-    <div>
-        <Card bg="li" className="" style={{maxWidth:"400px"}}>
-          <Card.Header className="bg-dark text-white p-3">{project.projectName}</Card.Header>
-          <Card.Body>
-            <div className="d-flex gap-2 justify-content-between mb-4 text-sm">
-                <span className="">Created at 1st March 2023</span>
-                <Badge pill bg="info">in progress</Badge>
-            </div>
-            <Card.Text>
-                {project.description}
-            </Card.Text>
-            <Link to={`/project/${project._id}`} className="btn btn-primary rounded-pill">
-                View project</Link>
-          </Card.Body>
-        </Card>
-    </div>
-  )
-}
+    <tr>
+      <td>{index}</td>
+      <td>{project.projectName}</td>
+      <td>
+        <a href={`/users/${project.creator.username}`} className="text-primary">
+          {project.creator.username}
+        </a>
+      </td>
+      <td>{date}</td>
+      <td>
+        <Badge bg={index % 2 ? "info" : "success"} pill>
+          {project.status}
+        </Badge>
+      </td>
+      <td>
+        <Link className="text-primary" to={`/projects/${project._id}`}>
+          view more
+        </Link>
+      </td>
+    </tr>
+  );
+};
 
-export default ProjectCard
+export default ProjectCard;
