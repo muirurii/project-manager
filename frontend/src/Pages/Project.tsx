@@ -12,7 +12,6 @@ import { useEffect } from "react";
 const Project = () => {
 
   const {projectId} = useParams();
-  console.log(projectId)
 
   const {loading, data, error} = useQuery(GET_PROJECT,{
     variables:{
@@ -41,7 +40,7 @@ const Project = () => {
             <Badge bg="info" pill>in progress</Badge>
           </span>
         <span>5 members</span>
-        <AddMember/>
+        <AddMember project={projectId || ""} username={user.username} />
         </div>
         <div className="d-flex gap-4">
         <Card className="border-0" style={{maxWidth:"550px"}}>

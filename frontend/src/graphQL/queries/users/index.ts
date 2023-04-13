@@ -39,3 +39,13 @@ export const REFRESH_USER = gql`
     }
   }
 `;
+
+export const GET_USERS = gql`
+
+  query getUsers($username: String!, $project: ID!) {
+    getUsers(username: $username, project: $project) {
+      username
+      _id
+    }
+  }
+`

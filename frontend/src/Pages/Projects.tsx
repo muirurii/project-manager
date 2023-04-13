@@ -16,10 +16,7 @@ const Projects = () => {
 
   useEffect(()=>{
     if(!user.isLogged) navigate("/");
-    if(data){
-      console.log(data,"useEff")
-    }
-  },[]);
+  },[user.isLogged]);
 
   if(loading) return <Loader height="80vh" width="100vw" />
   if(error){

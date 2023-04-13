@@ -28,7 +28,7 @@ const ProjectCard = ({
         </Badge>
       </td>
       <td>
-        <Link className="text-primary" to={`/projects/${project._id}`}>
+        <Link className="text-primary" to={`/project/${project._id}`}>
           view more
         </Link>
       </td>

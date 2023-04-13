@@ -21,6 +21,7 @@ body {
 
 .btn-primary {
     background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
     border-radius: 300px;
 }
 
